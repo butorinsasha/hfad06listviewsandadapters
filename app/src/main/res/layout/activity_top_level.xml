@@ -12,7 +12,7 @@
         android:layout_height="100dp"
         android:src="@drawable/starbuzz_logo"
         android:contentDescription="@string/sturbuzz_logo" />
-    
+
     <ListView
         android:id="@+id/list_options"
         android:layout_width="match_parent"

@@ -1,15 +1,15 @@
 package local.hfad.hfad06listviewsandadapters;
 
-import static android.view.View.*;
-
+import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
-public class TopLevelActivity extends AppCompatActivity {
+public class TopLevelActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,9 +19,17 @@ public class TopLevelActivity extends AppCompatActivity {
         //Create an OnItemClickListener
         AdapterView.OnItemClickListener itemClickListener = new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(AdapterView<?> parent,
+                                    View view,
+                                    int position,
+                                    long id) {
                 if (position == 0) {
                     Intent intent = new Intent(TopLevelActivity.this, DrinkCategoryActivity.class);
+                    intent.putExtra("id", id);
+
+                    Log.i(this.getClass().getName(), "item id is " + id);
+                    Toast.makeText(TopLevelActivity.this, "item id is " + id, Toast.LENGTH_SHORT).show();
+
                     TopLevelActivity.this.startActivity(intent);
                 }
             }

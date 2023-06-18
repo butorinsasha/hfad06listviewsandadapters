@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Starbuzz</string>
     <string name="sturbuzz_logo">Sturbuzz log</string>
+    <string name="title_activity_drink_category">Drinks</string>
+    <string name="title_activity_drink">Drink</string>
     <string-array name="options">
         <item>Drink</item>
         <item>Food</item>
