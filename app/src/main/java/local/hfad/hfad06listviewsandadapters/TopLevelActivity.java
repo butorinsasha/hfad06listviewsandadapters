@@ -17,12 +17,11 @@ public class TopLevelActivity extends Activity {
         setContentView(R.layout.activity_top_level);
 
         //Create an OnItemClickListener
-        AdapterView.OnItemClickListener itemClickListener = new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent,
-                                    View view,
-                                    int position,
-                                    long id) {
+        AdapterView.OnItemClickListener itemClickListener =
+                (AdapterView<?> parent,
+                 View view,
+                 int position,
+                 long id) -> {
                 if (position == 0) {
                     Intent intent = new Intent(TopLevelActivity.this, DrinkCategoryActivity.class);
                     intent.putExtra("id", id);
@@ -32,7 +31,6 @@ public class TopLevelActivity extends Activity {
 
                     TopLevelActivity.this.startActivity(intent);
                 }
-            }
         };
 
         //Add the listener to the list view

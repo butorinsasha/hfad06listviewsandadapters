@@ -13,9 +13,9 @@ public class DrinkCategoryActivity extends ListActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ListView drinksList = getListView();
+        ListView drinksListView = getListView();
 
-        Log.i(this.getClass().getName(), "drinksList is " + drinksList);
+        Log.i(this.getClass().getName(), "drinksListView is " + drinksListView);
 
         ArrayAdapter<Drink> drinkListAdapter = new ArrayAdapter<>(
                 this,
@@ -23,7 +23,7 @@ public class DrinkCategoryActivity extends ListActivity {
                 Drink.drinks
         );
 
-        drinksList.setAdapter(drinkListAdapter);
+        drinksListView.setAdapter(drinkListAdapter);
     }
 
     @Override
@@ -31,7 +31,7 @@ public class DrinkCategoryActivity extends ListActivity {
                                    View itemview,
                                    int position,
                                    long id) {
-//        super.onListItemClick(listView, itemview, position, id);
+        super.onListItemClick(listView, itemview, position, id);
         Intent intent = new Intent(this, DrinkActivity.class);
         intent.putExtra(DrinkActivity.EXTRA_DRINK_NUMBER, (int) id);
         startActivity(intent);
