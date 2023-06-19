@@ -24,10 +24,9 @@ public class TopLevelActivity extends Activity {
                  long id) -> {
                 if (position == 0) {
                     Intent intent = new Intent(TopLevelActivity.this, DrinkCategoryActivity.class);
-                    intent.putExtra("id", id);
 
-                    Log.i(this.getClass().getName(), "item id is " + id);
-                    Toast.makeText(TopLevelActivity.this, "item id is " + id, Toast.LENGTH_SHORT).show();
+                    Log.i(this.getClass().getName(), "item id position " + position);
+                    Toast.makeText(TopLevelActivity.this, "item id position " + position, Toast.LENGTH_SHORT).show();
 
                     TopLevelActivity.this.startActivity(intent);
                 }
