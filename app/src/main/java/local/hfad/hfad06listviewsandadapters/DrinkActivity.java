@@ -1,7 +1,6 @@
 package local.hfad.hfad06listviewsandadapters;
 
 import android.app.Activity;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,7 +16,7 @@ public class DrinkActivity extends Activity {
 
         //Get the drink from the intent
         int drinkNumber = (int) getIntent().getExtras().get(EXTRA_DRINK_NUMBER);
-        Drink drink = Drink.drinks[drinkNumber];
+        Drink drink = Drink.drinksArray[drinkNumber];
 
         //Populate the drink image
         ImageView drinkImageView = findViewById(R.id.photo);

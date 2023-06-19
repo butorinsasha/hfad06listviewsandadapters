@@ -20,7 +20,7 @@ public class DrinkCategoryActivity extends ListActivity {
         ArrayAdapter<Drink> drinkListAdapter = new ArrayAdapter<>(
                 this,
                 android.R.layout.simple_list_item_1,
-                Drink.drinks
+                Drink.drinksArray
         );
 
         drinksListView.setAdapter(drinkListAdapter);
