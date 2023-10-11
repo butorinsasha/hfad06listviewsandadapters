@@ -18,7 +18,7 @@ public class StarbuzzDataBaseHelper extends SQLiteOpenHelper {
                                                     + "DESCRIPTION TEXT, "
                                                     + "IMAGE_RESOURCE_ID INTEGER);";
 
-    private String insertIntoDrink(String name, String description, String imageResourceId) {
+    private String insertIntoDrink(String name, String description, int imageResourceId) {
         return "INSERT INTO DRINK (NAME, DESCRIPTION, IMAGE_REAOURCE_ID)"
                 + "VALUES"
                 + "('" + name + "', '" + description + "', '" + imageResourceId + "')";
@@ -37,7 +37,9 @@ public class StarbuzzDataBaseHelper extends SQLiteOpenHelper {
                                 + "DESCRIPTION TEXT, "
                                 + "IMAGE_REAOURCE_ID INTEGER);");
 
-//        sqLiteDatabase.execSQL(insertIntoDrink("Latte", "A couple of espresso with streamed milk", R.drawable.latte));
+
+        sqLiteDatabase.execSQL(insertIntoDrink("Latte", "A couple of espresso with streamed milk", R.drawable.latte));
+
         ContentValues drinkValues = new ContentValues();
         drinkValues.put("NAME", "latte");
         drinkValues.put("DESCRIPTION", "Espresso and steamed milk);");
