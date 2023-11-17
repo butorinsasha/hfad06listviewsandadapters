@@ -10,6 +10,7 @@ public class Drink {
             new Drink("Cuppuccino", "Espresso, hot milk, and a steamed milk foam", R.drawable.cappuccino),
             new Drink("Filter", "Highest quality beans roasted and brewed fresh", R.drawable.filter),
             new Drink("Americano", "No milk foam, just coffee and milk if you wish", R.drawable.americano)
+
     };
 
     public Drink(String name, String description, int imageResourceId) {
