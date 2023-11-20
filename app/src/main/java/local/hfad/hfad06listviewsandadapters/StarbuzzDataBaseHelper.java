@@ -9,13 +9,16 @@ public class StarbuzzDataBaseHelper extends SQLiteOpenHelper {
 
     // Class fields
     private static final String DB_NAME = "starbuzz";   // the name of the database
-    private static final int DB_VERSION = 1;            // the version of the database
+    private static final int DB_VERSION = 2;            // the version of the database
 
     private static final String CREATE_TABLE_DRINK = "CREATE TABLE DRINK ("
                                                     + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
                                                     + "NAME TEXT, "
                                                     + "DESCRIPTION TEXT, "
                                                     + "IMAGE_RESOURCE_ID INTEGER);";
+
+    private static final String ADD_COLUMN_FAVORITE_NUMERIC = "ALTER TABLE DRINK ADD COLUMN FAVORITE NUMERIC;";
+
     // Constructor
     public StarbuzzDataBaseHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
@@ -23,19 +26,13 @@ public class StarbuzzDataBaseHelper extends SQLiteOpenHelper {
 
     // Overriden class methods
     @Override
-    public void onCreate(SQLiteDatabase sqlLiteDatabase) {
-        sqlLiteDatabase.execSQL(CREATE_TABLE_DRINK);
-
-        insertDrink(sqlLiteDatabase, "Latte", "A couple of espresso with streamed milk", R.drawable.latte);
-        insertDrink(sqlLiteDatabase, "Cuppuccino", "Espresso, hot milk, and a steamed milk foam", R.drawable.cappuccino);
-        insertDrink(sqlLiteDatabase, "Filter", "Highest quality beans roasted and brewed fresh", R.drawable.filter);
-
-        insertDrink2(sqlLiteDatabase, "Americano", "No milk foam, just coffee and milk if you wish", R.drawable.americano);
+    public void onCreate(SQLiteDatabase sqLiteDatabase) {
+        updateMyDatabase(sqLiteDatabase, 0, DB_VERSION);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
-
+        updateMyDatabase(sqLiteDatabase, oldVersion, newVersion);
     }
 
 
@@ -53,5 +50,20 @@ public class StarbuzzDataBaseHelper extends SQLiteOpenHelper {
     private static void insertDrink2(SQLiteDatabase sqlLiteDatabase, String name, String description, int imageResourceId) {
         sqlLiteDatabase.execSQL("INSERT INTO (NAME, DESCRIPTION, IMAGE_REAOURCE_ID)"
                 + "VALUES ('" + name + "', '" + description + "', '" + imageResourceId + "')");
+    }
+
+    private static void updateMyDatabase(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
+        if (oldVersion < 1) {
+            sqLiteDatabase.execSQL(CREATE_TABLE_DRINK);
+
+            insertDrink(sqLiteDatabase, "Latte", "A couple of espresso with streamed milk", R.drawable.latte);
+            insertDrink(sqLiteDatabase, "Cuppuccino", "Espresso, hot milk, and a steamed milk foam", R.drawable.cappuccino);
+            insertDrink(sqLiteDatabase, "Filter", "Highest quality beans roasted and brewed fresh", R.drawable.filter);
+
+            insertDrink2(sqLiteDatabase, "Americano", "No milk foam, just coffee and milk if you wish", R.drawable.americano);
+        }
+        if (oldVersion < 2) {
+            sqLiteDatabase.execSQL(ADD_COLUMN_FAVORITE_NUMERIC);
+        }
     }
 }
