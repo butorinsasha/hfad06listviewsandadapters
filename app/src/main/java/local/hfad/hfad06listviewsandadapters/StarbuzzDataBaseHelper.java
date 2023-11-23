@@ -42,14 +42,14 @@ public class StarbuzzDataBaseHelper extends SQLiteOpenHelper {
 
         drinkValues.put("NAME", name);
         drinkValues.put("DESCRIPTION", description);
-        drinkValues.put("IMAGE_REAOURCE_ID", imageResourceId);
+        drinkValues.put("IMAGE_RESOURCE_ID", imageResourceId);
 
         sqlLiteDatabase.insert("DRINK", null, drinkValues);
     }
 
     private static void insertDrink2(SQLiteDatabase sqlLiteDatabase, String name, String description, int imageResourceId) {
-        sqlLiteDatabase.execSQL("INSERT INTO (NAME, DESCRIPTION, IMAGE_REAOURCE_ID)"
-                + "VALUES ('" + name + "', '" + description + "', '" + imageResourceId + "')");
+        sqlLiteDatabase.execSQL("INSERT INTO DRINK (NAME, DESCRIPTION, IMAGE_RESOURCE_ID)"
+                + " VALUES ('" + name + "', '" + description + "', '" + imageResourceId + "')");
     }
 
     private static void updateMyDatabase(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
