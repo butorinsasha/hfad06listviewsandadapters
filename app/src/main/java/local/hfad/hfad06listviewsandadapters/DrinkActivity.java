@@ -31,10 +31,10 @@ public class DrinkActivity extends Activity {
             db = startbuzzDatabaseHelper.getReadableDatabase();
             //Create a cursor
             cursor = db.query(
-                    "DRINK",
-                    new String[]{"NAME", "DESCRIPTION", "IMAGE_RESOURCE_ID"},
-                    "_id = ?",
-                    new String[]{Integer.toString(drinkNumber)},
+                    "DRINK",                                                    // SELECT ... FROM DRINK
+                    new String[]{"NAME", "DESCRIPTION", "IMAGE_RESOURCE_ID"},   // ...NAME, DESCRIPTION, IMAGE_RESOURCE_ID...
+                    "_id = ?",                                                  // WHERE _id = ...
+                    new String[]{Integer.toString(drinkNumber)},                // ... drinkNumber
                     null,
                     null,
                     null
@@ -67,19 +67,5 @@ public class DrinkActivity extends Activity {
             cursor.close();
             db.close();
         }
-
-        //Populate the drink name
-//        TextView drinkNameTextView = findViewById(R.id.name);
-//        drinkNameTextView.setText(drink.getName());
-
-        //Populate the drink description
-//        TextView drinkDescriptionTextView = findViewById(R.id.description);
-//        drinkDescriptionTextView.setText(drink.getDescription());
-
-        //Populate the drink image
-//        ImageView drinkImageView = findViewById(R.id.photo);
-//        drinkImageView.setImageResource(drink.getImageResourceId());
-//        drinkImageView.setContentDescription(drink.getName());
-
     }
 }
