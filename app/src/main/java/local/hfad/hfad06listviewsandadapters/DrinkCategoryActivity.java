@@ -16,8 +16,8 @@ import android.widget.Toast;
 public class DrinkCategoryActivity extends ListActivity {
 
     //Create a database and cursor vars
-    SQLiteDatabase db = null;
-    Cursor cursor = null;
+    private SQLiteDatabase db;
+    private Cursor cursor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
