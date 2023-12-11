@@ -68,6 +68,7 @@ public class DrinkCategoryActivity extends ListActivity {
         super.onListItemClick(listView, itemview, position, id);
         Intent intent = new Intent(this, DrinkActivity.class);
         intent.putExtra(DrinkActivity.EXTRA_DRINK_NUMBER, (int) id);
+        Toast.makeText(this, "position = " + position + "; id = " + id, Toast.LENGTH_SHORT).show();
         startActivity(intent);
     }
 }

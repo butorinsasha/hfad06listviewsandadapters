@@ -57,8 +57,6 @@ public class DrinkActivity extends Activity {
                 ImageView drinkImageView = findViewById(R.id.photo);
                 drinkImageView.setImageResource(imageResourceId);
                 drinkImageView.setContentDescription(nameText);
-
-                Toast.makeText(this, "Database in action", Toast.LENGTH_SHORT).show();
             }
         } catch (SQLiteException e) {
             Toast.makeText(this, "Database unavailable", Toast.LENGTH_SHORT).show();
