@@ -21,7 +21,6 @@ public class DrinkActivity extends Activity {
 
         //Get the drink from the intent
         int drinkNumber = (int) getIntent().getExtras().get(EXTRA_DRINK_NUMBER);
-        Drink drink = Drink.drinksArray[drinkNumber];
 
         //Create a cursor
         Cursor cursor = null;
@@ -64,7 +63,9 @@ public class DrinkActivity extends Activity {
         } catch (SQLiteException e) {
             Toast.makeText(this, "Database unavailable", Toast.LENGTH_SHORT).show();
         } finally {
+            assert cursor != null;
             cursor.close();
+
             db.close();
         }
     }

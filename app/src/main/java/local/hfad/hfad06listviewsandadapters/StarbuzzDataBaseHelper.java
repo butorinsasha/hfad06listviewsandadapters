@@ -24,7 +24,7 @@ public class StarbuzzDataBaseHelper extends SQLiteOpenHelper {
         super(context, DB_NAME, null, DB_VERSION);
     }
 
-    // Overriden class methods
+    // Overridden class methods
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         updateMyDatabase(sqLiteDatabase, 0, DB_VERSION);
