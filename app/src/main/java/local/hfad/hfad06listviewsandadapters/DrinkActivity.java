@@ -6,8 +6,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.util.Pair;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageView;
@@ -18,6 +19,47 @@ public class DrinkActivity extends Activity {
 
     public static final String EXTRA_DRINK_NUMBER = "drinkNumber";
     public int drinkNumber = 0;
+
+    private class UpdateDrinkTask extends AsyncTask<Integer, Void, Boolean> {
+
+        ContentValues favoriteDrinkContentValues = new ContentValues();
+
+        @Override
+        protected void onPreExecute(){
+            CheckBox favoriteCheckBox = findViewById(R.id.favorite);
+            favoriteDrinkContentValues.put("FAVORITE", favoriteCheckBox.isChecked());
+        }
+
+        @Override
+        protected Boolean doInBackground(Integer... integers) {
+            SQLiteOpenHelper startbuzzDatabaseHelper = new StarbuzzDataBaseHelper(DrinkActivity.this);
+            try (SQLiteDatabase db = startbuzzDatabaseHelper.getWritableDatabase()) {
+
+                db.update(
+                        "DRINK",
+                        favoriteDrinkContentValues,
+                        "_id = ?",
+//                        new String[]{Integer.toString(drinkNumber)}
+                        new String[]{Integer.toString(integers[0])}
+                );
+                return true;
+            } catch (SQLiteException e) {
+                return false;
+            }
+        }
+
+//        @Override
+//        protected void onProgressUpdate() {
+//
+//        }
+
+        @Override
+        protected void onPostExecute(Boolean success) {
+            if (!success) {
+                Toast.makeText(DrinkActivity.this, "Database unavailable", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,30 +120,6 @@ public class DrinkActivity extends Activity {
 
     public void onFavoriteClicked(View view) {
         Toast.makeText(this, "drinkNumber = " + drinkNumber, Toast.LENGTH_SHORT).show();
-
-//        CheckBox favoriteCheckBox = findViewById(R.id.favorite);
-        CheckBox favoriteCheckBox = (CheckBox) view;        // Try another way of getting favoriteCheckBox
-
-        ContentValues favoriteCheckBoxValue = new ContentValues();
-        favoriteCheckBoxValue.put("FAVORITE", favoriteCheckBox.isChecked());
-
-        // Create db again because we always close it after onCreate() finished
-        SQLiteDatabase db = null;
-        try {
-            SQLiteOpenHelper startbuzzDatabaseHelper = new StarbuzzDataBaseHelper(this);
-            db = startbuzzDatabaseHelper.getReadableDatabase();
-
-            db.update(
-                    "DRINK",
-                    favoriteCheckBoxValue,
-                    "_id = ?",
-                    new String[] {Integer.toString(drinkNumber)}
-            );
-
-        } catch (SQLiteException e) {
-            Toast.makeText(this, "Database unavailable", Toast.LENGTH_SHORT).show();
-        } finally {
-            if (db != null ) db.close();
-        }
+        new UpdateDrinkTask().execute(drinkNumber);
     }
 }
